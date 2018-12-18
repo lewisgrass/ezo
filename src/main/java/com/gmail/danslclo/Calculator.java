@@ -3,7 +3,7 @@ package com.gmail.danslclo;
 import java.util.regex.Pattern;
 
 public class Calculator {
-	private static final Pattern PATTERN_EXTRACT_OPERATION = Pattern.compile("^([^+*/-]+)([^\\d])([^+*/-]+)$");
+	//private static final Pattern PATTERN_EXTRACT_OPERATION = Pattern.compile("^([^+*/-]+)([^\\d])([^+*/-]+)$");
 	private static final Pattern PATTERN_CLEAN_ZERO_DECIMALS = Pattern.compile("\\.0*$");
 	public static enum Operator{
 		OPERATION_ADD("+"),
@@ -30,7 +30,7 @@ public class Calculator {
 		}
 	}
 
-	private static float operate(String numA, String numB) throws ZeroDivisionError {
+	private static float operate(String numA, String numB) {
 		Float floatA = null;
 		Float floatB = null;
 		Float result = 0F;
@@ -42,8 +42,14 @@ public class Calculator {
 			floatA = Float.parseFloat(leftValue);
 			String remainingPart = Parsor.getRightPartValue(cleanedValue);
 			String operator = Parsor.extractLeftOperand(remainingPart);
+			if(remainingPart.isEmpty() || operator == null) {
+				throw new IncompleteOperationError("Incomplete operation error");
+			}
 			operation = Operator.getOperator(operator);
 			numB = Parsor.getRightPartOperand(remainingPart);
+			if(numB.isEmpty()) {
+				throw new IncompleteOperationError("Incomplete operation error");
+			}
 		}else {
 			floatA = Float.parseFloat(numA);
 			String operator = Parsor.extractLeftOperand(numB);

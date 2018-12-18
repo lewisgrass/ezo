@@ -85,4 +85,18 @@ class CalculatorTest {
 		String addResult = Calculator.parseSimpleOperation("   4  * 2   -7");
 		assertEquals("1", addResult);
 	}
+	
+	@Test
+	void testExecuteIncompleteOperation() {
+		assertThrows(IncompleteOperationError.class, ()->{
+			Calculator.parseSimpleOperation("1");
+		});
+	}
+	
+	@Test
+	void testExecuteIncompleteOperationWithOperator() {
+		assertThrows(IncompleteOperationError.class, ()->{
+			Calculator.parseSimpleOperation("1*");
+		});
+	}
 }

@@ -14,7 +14,10 @@ public class Golf {
 		}
 		boolean newOperation = true;
 		while(newOperation) {
-			userInput = console.readLine("Entrez une opération mathématique.  Tapez exit pour sortir\n");
+			userInput = console.readLine("Entrez une opération mathématique.  Tapez exit pour sortir\n").trim();
+			if(userInput.isEmpty()) {
+				continue;
+			}
 			if(userInput.equals("exit")) {
 				break;
 			}
@@ -27,6 +30,8 @@ public class Golf {
 				System.out.println(Calculator.parseSimpleOperation(userInput) + "");
 			} catch (ZeroDivisionError e) {
 				System.err.println("Erreur: division par zéro");
+			} catch (IncompleteOperationError e) {
+				System.err.println("Erreur: Opération incomplète");
 			}
 		}
 	}
