@@ -65,4 +65,10 @@ class ParsorTest {
 		boolean isNumber = Parsor.isNumber("6.00004");
 		assertTrue(isNumber);
 	}
+	
+	@Test
+	void testReplaceComa() {
+		String result = Parsor.replaceComa("6,00004+3,5");
+		assertEquals("6.00004+3.5", result);
+	}
 }

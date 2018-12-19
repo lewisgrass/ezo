@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static com.gmail.danslclo.Calculator.Operator.*;
 import org.junit.jupiter.api.Test;
 
+import com.gmail.danslclo.error.IncompleteOperationError;
+import com.gmail.danslclo.error.ZeroDivisionError;
+
 class CalculatorTest {
 
 	@Test
@@ -98,5 +101,11 @@ class CalculatorTest {
 		assertThrows(IncompleteOperationError.class, ()->{
 			Calculator.parseSimpleOperation("1*");
 		});
+	}
+	
+	@Test
+	void testExecuteWithComa() {
+		String result = Calculator.parseSimpleOperation("1,1+2.1");
+		assertEquals("3.1999998", result);
 	}
 }

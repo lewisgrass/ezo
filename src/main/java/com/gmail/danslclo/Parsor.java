@@ -13,6 +13,7 @@ public class Parsor{
 	private static final Pattern PATTERN_EXTRACT_LEFT_VALUE = Pattern.compile("^([+-]?[\\d\\.]+)");
 	private static final Pattern PATTERN_EXTRACT_LEFT_OPERAND = Pattern.compile("^([\\-\\+]?[^\\d\\.])");
 	private static final Pattern PATTERN_IS_NUMBER = Pattern.compile("^[\\+\\-]?[\\d\\.]+$");
+	private static final Pattern PATTERN_COMA = Pattern.compile(",");
 	
 	public static boolean isOperationValid(String operation) {
 		String cleanedOperation = cleanOperation(operation);
@@ -24,6 +25,11 @@ public class Parsor{
 	public static String cleanOperation(String operation) {
 		Matcher matcher = PATTERN_CLEAR_SPACES.matcher(operation);
 		return matcher.replaceAll("");
+	}
+	
+	public static String replaceComa(String operation) {
+		Matcher matcher = PATTERN_COMA.matcher(operation);
+		return matcher.replaceAll(".");
 	}
 	
 	public static String replaceRedundantOperator(String operation) {

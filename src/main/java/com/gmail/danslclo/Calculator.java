@@ -2,6 +2,9 @@ package com.gmail.danslclo;
 
 import java.util.regex.Pattern;
 
+import com.gmail.danslclo.error.IncompleteOperationError;
+import com.gmail.danslclo.error.ZeroDivisionError;
+
 public class Calculator {
 	//private static final Pattern PATTERN_EXTRACT_OPERATION = Pattern.compile("^([^+*/-]+)([^\\d])([^+*/-]+)$");
 	private static final Pattern PATTERN_CLEAN_ZERO_DECIMALS = Pattern.compile("\\.0*$");
@@ -38,6 +41,7 @@ public class Calculator {
 		if(numB == null) {
 			String cleanedValue = Parsor.replaceRedundantOperator(numA);
 			cleanedValue = Parsor.cleanOperation(cleanedValue);
+			cleanedValue = Parsor.replaceComa(cleanedValue);
 			String leftValue = Parsor.extractLeftValue(cleanedValue);
 			floatA = Float.parseFloat(leftValue);
 			String remainingPart = Parsor.getRightPartValue(cleanedValue);

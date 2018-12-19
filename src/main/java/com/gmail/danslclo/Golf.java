@@ -2,6 +2,9 @@ package com.gmail.danslclo;
 
 import java.io.Console;
 
+import com.gmail.danslclo.error.IncompleteOperationError;
+import com.gmail.danslclo.error.ZeroDivisionError;
+
 public class Golf {
 	
 	public static void main(String[] args) {
